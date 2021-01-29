@@ -8,7 +8,6 @@ const cursor = document.querySelector('.cursor');
 const cursorText = cursor.querySelector('span');
 const logo = document.querySelector('#logo');
 const burgerMenu = document.querySelector('.burger');
-
 const exploreButtons = document.querySelectorAll('.explore');
 
 //functions
@@ -131,6 +130,45 @@ function handleMouseLeaveExplore(e) {
 
 }
 
+
+function handleBurgerMenuClick(e) {
+
+  if (!e.target.classList.contains('active')) {
+    gsap.to('.line1', 1, {
+      rotate: '45deg',
+      y: '5',
+    });
+
+    gsap.to('.line2', 1, {
+      rotate: '-45deg',
+      y: '-5'
+    });
+
+    gsap.to('.nav-bar', 1, {
+      clipPath: 'circle(2500px at 100% -10%);'
+    });
+
+  } else {
+    gsap.to('.line1', 1, {
+      rotate: '0deg',
+      y: '0'
+    });
+
+    gsap.to('.line2', 1, {
+      rotate: '0deg',
+      y: '0'
+    });
+
+    gsap.to('.nav-bar', 1, {
+      clipPath: 'circle(50px at 100% -10%)'
+    });
+  }
+
+  e.target.classList.toggle('active');
+
+
+}
+
 animateSlides();
 
 //listeners
@@ -141,6 +179,7 @@ logo.addEventListener('mouseleave', handleMouseLeaveLogo);
 
 burgerMenu.addEventListener('mouseenter', handleMouseEnterLogo);
 burgerMenu.addEventListener('mouseleave', handleMouseLeaveLogo);
+burgerMenu.addEventListener('click', handleBurgerMenuClick);
 
 exploreButtons.forEach(exploreButton => {
   exploreButton.addEventListener('mouseenter', handleMouseEnterExplore);
